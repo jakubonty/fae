@@ -85,6 +85,17 @@ module Fae
             rename_unique_attribute(new_record, attribute, value) if attr_is_unique?(new_record, attribute.first)
           end
 
+          # copy has_one assets
+          new_record.class.reflect_on_all_associations(:has_one).each do |has_one_attribute|
+            if ['::Fae::Image','::Fae::File'].include?(has_one_attribute.class_name)
+              old_r = record.send(has_one_attribute.name)
+              new_r = old_r.dup
+              Fae::AssetCloner.new(old_r, new_r, :asset).set_file if old_r.asset.present? && old_r.asset.url.present?
+              new_r.save
+              new_record.send("#{has_one_attribute.name}=", new_r)
+            end
+          end
+
           @cloned_item.send(association) << new_record
         end
       end
