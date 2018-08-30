@@ -40,16 +40,16 @@ module Fae
 
       link_to url, class: "slider-wrapper #{link_class}", method: :post, remote: true do
         '<div class="slider-options">
-          <div class="slider-option slider-option-yes">Yes</div>
+          <div class="slider-option slider-option-yes">Ano</div>
           <div class="slider-option-selector"></div>
-          <div class="slider-option slider-option-no">No</div>
+          <div class="slider-option slider-option-no">Ne</div>
         </div>'.html_safe
       end
     end
 
     def fae_clone_button(item)
       return if item.blank?
-      link_to "#{@index_path}?from_existing=#{item.id}", method: :post, title: 'Clone', class: 'js-tooltip table-action', data: { confirm: t('fae.clone_confirmation') } do
+      link_to "#{@index_path}?from_existing=#{item.id}", method: :post, title: 'Klonovat', class: 'js-tooltip table-action', data: { confirm: t('fae.clone_confirmation') } do
         concat content_tag :i, nil, class: 'icon-copy'
       end
     end
@@ -73,7 +73,7 @@ module Fae
     def fae_filter_form(options = {}, &block)
       options[:collection] ||= @items
       options[:action]     ||= "#{@index_path}/filter"
-      options[:title]      ||= "Search #{@klass_humanized.pluralize.titleize}"
+      options[:title]      ||= "Hledat #{tryslate(@klass_humanized.pluralize.titleize)}"
       options[:search]       = true if options[:search].nil?
       options[:cookie_key] ||= false
 
@@ -93,13 +93,22 @@ module Fae
         if block_given?
           filter_group_wrapper = content_tag(:div, class: 'table-filter-group-wrapper') do
             concat capture(&block)
-            concat content_tag(:div, content_tag(:a, 'Reset Search', class: 'js-reset-btn button -small hidden', href: '#'), class: 'table-filter-group')
+            concat content_tag(:div, content_tag(:a, 'Resetovat vyhledávání', class: 'js-reset-btn button -small hidden', href: '#'), class: 'table-filter-group')
           end
         end
 
         concat filter_group_wrapper
         # I know this `unless !` looks like it should be an `if` but it's definitely supposed to be `unless !`
-        concat submit_tag 'Apply Filters', class: 'hidden' unless !options[:search]
+        concat submit_tag 'Applikovat filtery', class: 'hidden' unless !options[:search]
+      end
+    end
+
+    def tryslate(attribute)
+      key = "simple_form.labels.defaults.#{attribute.to_s.parameterize.tr('-', '_')}"
+      if I18n.exists?(key)
+        attribute = I18n.t(key)
+      else
+        attribute
       end
     end
 
@@ -107,7 +116,10 @@ module Fae
       options[:label]           ||= attribute.to_s.titleize
       options[:collection]      ||= default_collection_from_attribute(attribute)
       options[:label_method]    ||= :fae_display_field
-      options[:placeholder]       = "All #{options[:label].pluralize}" if options[:placeholder].nil?
+
+      options[:label] = tryslate(options[:label])
+
+      options[:placeholder]       = "Všechny #{options[:label]}" if options[:placeholder].nil?
       options[:options]         ||= []
       options[:grouped_by]      ||= nil
       options[:grouped_options] ||= []

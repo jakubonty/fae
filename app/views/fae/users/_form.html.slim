@@ -6,8 +6,8 @@
       = form_header @user
     .content-header-buttons
       - cancel_path = params[:action] == 'settings' ? root_path : users_path
-      a.button#js-header-cancel href=cancel_path Cancel
-      = f.submit 'Save'
+      a.button#js-header-cancel href=cancel_path Zrušit
+      = f.submit 'Uložit'
 
   main.content
     = fae_input f, :first_name
