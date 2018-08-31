@@ -39,16 +39,16 @@ nav.nav.mobilenav
             span.mobilenav-subheader.js-mobile-back Admin
             ul
               li: a href=fae.users_path Users
-              li: a href=fae.activity_log_path Activity Log
+              li: a href=fae.activity_log_path Záznam aktivity
               - if current_user.super_admin?
-                li: a href=fae.option_path Root Settings
+                li: a href=fae.option_path Hlavní nastavení
 
     - if user_signed_in?
       li.mobilenav-user
         span.mobilenav-user-header = current_user.full_name
         ul
-          li: a.-logout href=fae.destroy_user_session_path Log Out
-          li: a.-settings href=fae.settings_path Your Settings
+          li: a.-logout href=fae.destroy_user_session_path Odhlášení
+          li: a.-settings href=fae.settings_path Vaše nastavení
           li: a.-support href=fae.help_path Support
     - site_urls_are_present = @option.stage_url.present? && @option.live_url.present?
     - view_site_class = site_urls_are_present ? 'mobilenav-accordion js-accordion' : nil

@@ -87,8 +87,8 @@ main.content
           thead
             tr
               th.th-sortable-handle
-              th Title
-              th.-action-wide Modified
+              th Titulek
+              th.-action-wide Upraveno
               th.-action data-sorter="false"
 
           tbody

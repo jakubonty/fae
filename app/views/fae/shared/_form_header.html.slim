@@ -7,7 +7,7 @@ ruby:
   subnav              ||= []
   header_as_string      = header.is_a?(String) ? header : header.class.name.split('::').last
   header_as_string      = header_as_string.singularize
-  title               ||= "#{params[:action]} #{header_as_string}".titleize
+  title               ||= "#{tryslate(params[:action])} #{tryslate(header_as_string)}".titleize
   breadcrumb            = !local_assigns[:breadcrumbs].eql?(false)
   languages           ||= false
   show_flash_messages   = !local_assigns[:show_flash_messages].eql?(false)

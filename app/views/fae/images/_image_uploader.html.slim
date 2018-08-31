@@ -3,11 +3,11 @@ ruby:
   item                ||= f.object
   image_name          ||= :image
   the_image             = item.send(image_name)
-  label               ||= image_name.to_s.titleize
-  alt_label           ||= "#{label} Alt Text"
-  caption_label       ||= "#{label} Caption"
+  label               ||= tryslate(image_name.to_s.titleize)
+  alt_label           ||= "#{tryslate(label)} alt"
+  caption_label       ||= "#{tryslate(label)} titulek"
   helper_text         ||= ""
-  alt_helper_text     ||= 'Brief description of image contents, used in hover text and by visually impaired users.'
+  alt_helper_text     ||= 'Krátký popisek obrázku, který se zobrazí před načtením obrázku a lidem se čtečkou textu.'
   caption_helper_text ||= ""
   show_alt              = true if show_alt.nil?
   show_caption        ||= false

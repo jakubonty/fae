@@ -1,7 +1,7 @@
 header.content-header.js-content-header.-dashboard
   div
     i.icon-home>
-    | &nbsp;&nbsp;Hello
+    | &nbsp;&nbsp;
     strong< = current_user.full_name
 
 == render 'flash_messages'
@@ -11,9 +11,9 @@ header.content-header.js-content-header.-dashboard
     table.js-sort-column
       thead
         tr
-          th Name
-          th Type
-          th.-action-wide Modified
+          th Název
+          th Typ
+          th.-action-wide Upraveno
       tbody
         - @list.each do |item|
           - begin

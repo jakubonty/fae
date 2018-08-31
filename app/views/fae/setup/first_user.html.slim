@@ -1,11 +1,11 @@
 .first_user-form
-  p Please create your super admin user.
+  p Prosím, vytvořte svého super admin uživatele.
 
   = simple_form_for(@user, html: { multipart: true, novalidate: true }, url: fae.first_user_path) do |f|
-    = fae_input f, :first_name
-    = fae_input f, :last_name
+    = fae_input f, :first_name, label: 'Jméno'
+    = fae_input f, :last_name, label: 'Příjmení'
     = fae_input f, :email
-    = fae_input f, :password, helper_text: 'Passwords must contain at least 8 characters.'
-    = fae_input f, :password_confirmation
+    = fae_input f, :password, helper_text: 'Hesla musí obsahovat alespoň 8 znaků.', label: 'Heslo'
+    = fae_input f, :password_confirmation, label: 'Potvrzení hesla'
     .login-form-actions
       = f.button :submit, "Submit"

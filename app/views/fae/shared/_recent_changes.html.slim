@@ -5,10 +5,10 @@
       table
         thead
           tr
-            th User
-            th Type
-            th Attribute(s) Updated
-            th.-action-wide Modified
+            th Uživatel
+            th Typ
+            th Upravené atributy
+            th.-action-wide Upraveno
         tbody
           - if @item.try(:tracked_changes).present?
             - @item.tracked_changes.each do |change|
@@ -19,4 +19,4 @@
                 td = fae_datetime_format(change.updated_at)
           - else
             tr
-              td colspan="4" No changes recorded
+              td colspan="4" Žádné změny
