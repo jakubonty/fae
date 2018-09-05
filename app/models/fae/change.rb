@@ -45,7 +45,7 @@ module Fae
         # apply conditions and search from above to our scope
         order(id: :desc)
           .includes(:user).references(:user)
-          .where(Arel.sql(date_scope)).where(conditions).where(Arel.sql(search))
+          .where(date_scope).where(conditions).where(search)
       end
 
     end

@@ -18,7 +18,7 @@ module Fae
     end
 
     def activity_log_filter
-      if params[:commit] == "Reset Search"
+      if params[:commit].downcase.include?('reset')
         @items = Fae::Change.order(id: :desc).page(params[:page])
       else
         @items = Fae::Change.filter(params).fae_sort(params).page(params[:page])

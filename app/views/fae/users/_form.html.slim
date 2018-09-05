@@ -1,7 +1,7 @@
 = simple_form_for(@user, html: {multipart: true, novalidate: true}) do |f|
   header.content-header.js-content-header
     - if params[:action] === 'settings'
-      h1 Your Settings
+      h1 Vaše  nastavení
     - else
       = form_header @user
     .content-header-buttons
@@ -10,10 +10,10 @@
       = f.submit 'Uložit'
 
   main.content
-    = fae_input f, :first_name
-    = fae_input f, :last_name
-    = fae_input f, :email
-    = fae_input f, :password, helper_text: 'To update your password, fill out the fields below. Otherwise leave blank. Passwords must contain at least 8 characters.'
-    = fae_input f, :password_confirmation
+    = fae_input f, :first_name, label: 'Jméno'
+    = fae_input f, :last_name, label: 'Příjmení'
+    = fae_input f, :email, label: 'Email'
+    = fae_input f, :password, helper_text: 'Ṕro změnu hesla vyplňte pole, jinak bude heslo prázdné, heslo musí obsahovat alespoň 8 znaků.', label: 'Heslo'
+    = fae_input f, :password_confirmation, label: 'Heslo'
     - if current_user.admin? || current_user.super_admin?
-      = fae_association f, :role, collection: @role_collection
+      = fae_association f, :role, collection: @role_collection, label: 'Role'

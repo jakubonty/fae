@@ -99,7 +99,7 @@ module Fae
 
         concat filter_group_wrapper
         # I know this `unless !` looks like it should be an `if` but it's definitely supposed to be `unless !`
-        concat submit_tag 'Applikovat filtery', class: 'hidden' unless !options[:search]
+        concat submit_tag 'Aplikovat filtry', class: 'hidden' unless !options[:search]
       end
     end
 
