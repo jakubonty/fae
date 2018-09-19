@@ -96,6 +96,22 @@ module Fae
             end
           end
 
+          # copy inner has many relation ships
+          new_record.class.reflect_on_all_associations(:has_many).each do |has_many|
+            if !['Fae::Change'].include?(has_many.class_name)
+              item = @item
+              @item = record
+              klass_singular = @klass_singular
+              @klass_singular = @item.class.name.underscore
+              cloned_item = @cloned_item
+              @cloned_item = new_record
+              clone_has_many_relationships(has_many.name)
+              @item = item
+              @klass_singular = klass_singular
+              @cloned_item = cloned_item
+            end
+          end
+
           @cloned_item.send(association) << new_record
         end
       end
